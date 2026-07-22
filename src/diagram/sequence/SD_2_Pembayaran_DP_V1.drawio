@@ -1,0 +1,103 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="sd_dp_feedback" name="SD - Pembayaran DP (Feedback)">
+    <mxGraphModel dx="1471" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="L1" parent="1" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fontStyle=1;" value="Customer" vertex="1">
+          <mxGeometry height="750" width="60" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="L2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontStyle=1;" value="Halaman Pembayaran" vertex="1">
+          <mxGeometry height="750" width="140" x="160" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="L3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontStyle=1;" value="Database" vertex="1">
+          <mxGeometry height="750" width="100" x="380" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="L4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontStyle=1;" value="Order Management" vertex="1">
+          <mxGeometry height="750" width="140" x="560" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="L5" parent="1" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;fontStyle=1;" value="Admin" vertex="1">
+          <mxGeometry height="750" width="60" x="800" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="act_c" parent="1" style="html=1;points=[];perimeter=orthogonalPerimeter;fillColor=#ffffff;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="600" width="10" x="65" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="act_p" parent="1" style="html=1;points=[];perimeter=orthogonalPerimeter;fillColor=#ffffff;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="600" width="10" x="225" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="act_a" parent="1" style="html=1;points=[];perimeter=orthogonalPerimeter;fillColor=#ffffff;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="300" width="10" x="825" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="act_om" parent="1" style="html=1;points=[];perimeter=orthogonalPerimeter;fillColor=#ffffff;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="300" width="10" x="625" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="1. uploadBuktiDP(file)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="140" as="sourcePoint" />
+            <mxPoint x="225" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="2. simpanData(file)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="235" y="180" as="sourcePoint" />
+            <mxPoint x="430" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="3. updateStatus(&#39;WAITING_VERIFY&#39;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="235" y="220" as="sourcePoint" />
+            <mxPoint x="430" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="4. cekDaftarPesanan()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="300" as="sourcePoint" />
+            <mxPoint x="635" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame1" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;width=40;height=30;boundedLbl=1;verticalAlign=middle;align=center;spacingLeft=5;fontStyle=1;" value="alt" vertex="1">
+          <mxGeometry height="280" width="700" x="150" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_ya" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="[Bukti Valid]" vertex="1">
+          <mxGeometry height="20" width="100" x="199" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="5. updateStatus(&#39;IN_PRODUCTION&#39;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="410" as="sourcePoint" />
+            <mxPoint x="430" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="6. tampilkanNotifikasi(&#39;Pembayaran Diterima&#39;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="450" as="sourcePoint" />
+            <mxPoint x="235" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="7. tampilkanKeCustomer()">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="225" y="480" as="sourcePoint" />
+            <mxPoint x="75" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sep1" parent="1" style="shape=line;html=1;strokeWidth=1;strokeColor=#000000;dashed=1;" value="" vertex="1">
+          <mxGeometry height="10" width="700" x="150" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_tdk" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="[Bukti Tidak Valid]" vertex="1">
+          <mxGeometry height="20" width="100" x="160" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="8. updateStatus(&#39;REJECTED&#39;, alasan)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625" y="560" as="sourcePoint" />
+            <mxPoint x="430" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;edgeStyle=orthogonalEdgeStyle;rounded=0;" value="9. tampilkanNotifikasi(&#39;Pembayaran Ditolak&#39;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="590" as="sourcePoint" />
+            <mxPoint x="235" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

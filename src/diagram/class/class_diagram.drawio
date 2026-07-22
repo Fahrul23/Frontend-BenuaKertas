@@ -1,0 +1,138 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="DB_Schema_Updated" name="Database Schema">
+    <mxGraphModel dx="1500" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t_users" parent="1" value="users" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="40" y="40" width="280" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="f_users" parent="t_users" value="- id: Int&#xa;- email: String&#xa;- name: String&#xa;- password: String&#xa;- role: Enum&#xa;- phone: String?&#xa;- province: String?&#xa;- city: String?&#xa;- district: String?&#xa;- postalCode: String?&#xa;- detailAddress: String?&#xa;- createdAt: DateTime&#xa;- resetPasswordExpiry: DateTime?&#xa;- resetPasswordToken: String?&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="t_orders" parent="1" value="orders" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="340" y="40" width="280" height="870" as="geometry" />
+        </mxCell>
+        <mxCell id="f_orders" parent="t_orders" value="- id: Int&#xa;- orderNumber: String&#xa;- userId: Int&#xa;- boxModel: String&#xa;- sizePanjang: Decimal&#xa;- sizeLebar: Decimal&#xa;- sizeTinggi: Decimal&#xa;- sizeTinggiTutup: Decimal?&#xa;- material: String&#xa;- materialThickness: Int&#xa;- colorOption: String&#xa;- laminationSide: String&#xa;- laminationType: String?&#xa;- designFileUrl: String?&#xa;- designFilePublicId: String?&#xa;- designFileName: String?&#xa;- designFileSize: Int?&#xa;- designFileFormat: String?&#xa;- customerNote: String?&#xa;- quantity: Int&#xa;- customerPhone: String?&#xa;- shippingProvince: String?&#xa;- shippingCity: String?&#xa;- shippingDistrict: String?&#xa;- shippingPostalCode: String?&#xa;- shippingDetailAddress: String?&#xa;- planoType: String?&#xa;- paperWidth: Float?&#xa;- paperHeight: Float?&#xa;- jumlahMata: Int?&#xa;- planoOrientation: String?&#xa;- qtyPlano: Float?&#xa;- qtyRim: Int?&#xa;- totalBayar: Float?&#xa;- hargaPerPcs: Float?&#xa;- subtotal: Decimal&#xa;- totalAmount: Decimal&#xa;- orderStatus: Enum&#xa;- paymentStatus: Enum&#xa;- estimatedProductionDays: Int&#xa;- productionStartDate: DateTime?&#xa;- productionEndDate: DateTime?&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="844" as="geometry" />
+        </mxCell>
+        <mxCell id="t_order_history" parent="1" value="order_history" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="640" y="40" width="280" height="194" as="geometry" />
+        </mxCell>
+        <mxCell id="f_order_history" parent="t_order_history" value="- id: Int&#xa;- orderId: Int&#xa;- previousStatus: String?&#xa;- newStatus: String&#xa;- changedBy: Int?&#xa;- changeType: Enum&#xa;- notes: String?&#xa;- createdAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="t_payments" parent="1" value="payments" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="940" y="40" width="280" height="354" as="geometry" />
+        </mxCell>
+        <mxCell id="f_payments" parent="t_payments" value="- id: Int&#xa;- orderId: Int&#xa;- paymentNumber: String&#xa;- paymentMethod: Enum&#xa;- bankName: String?&#xa;- accountNumber: String?&#xa;- accountHolderName: String?&#xa;- amount: Decimal&#xa;- paymentProofUrl: String?&#xa;- paymentProofPublicId: String?&#xa;- paymentProofName: String?&#xa;- paymentStatus: Enum&#xa;- verifiedBy: Int?&#xa;- verifiedAt: DateTime?&#xa;- rejectionReason: String?&#xa;- paidAt: DateTime?&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="328" as="geometry" />
+        </mxCell>
+        <mxCell id="t_box_models" parent="1" value="box_models" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="40" y="640" width="280" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="f_box_models" parent="t_box_models" value="- id: Int&#xa;- code: String&#xa;- name: String&#xa;- description: String?&#xa;- imageUrl: String?&#xa;- isActive: Boolean&#xa;- basePrice: Decimal?&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="184" as="geometry" />
+        </mxCell>
+        <mxCell id="t_materials" parent="1" value="materials" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="340" y="640" width="280" height="194" as="geometry" />
+        </mxCell>
+        <mxCell id="f_materials" parent="t_materials" value="- id: Int&#xa;- code: String&#xa;- name: String&#xa;- description: String?&#xa;- imageUrl: String?&#xa;- isActive: Boolean&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="t_plano_types" parent="1" value="plano_types" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="640" y="640" width="280" height="226" as="geometry" />
+        </mxCell>
+        <mxCell id="f_plano_types" parent="t_plano_types" value="- id: Int&#xa;- code: String&#xa;- width: Float&#xa;- height: Float&#xa;- effectiveWidth: Float&#xa;- effectiveHeight: Float&#xa;- isActive: Boolean&#xa;- sortOrder: Int&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="t_material_prices" parent="1" value="material_prices" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="940" y="640" width="280" height="194" as="geometry" />
+        </mxCell>
+        <mxCell id="f_material_prices" parent="t_material_prices" value="- id: Int&#xa;- planoCode: String&#xa;- materialCode: String&#xa;- thickness: Int&#xa;- price: Float&#xa;- isActive: Boolean&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="t_finishing_options" parent="1" value="finishing_options" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="40" y="1240" width="280" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="f_finishing_options" parent="t_finishing_options" value="- id: Int&#xa;- code: String&#xa;- name: String&#xa;- description: String?&#xa;- imageUrl: String?&#xa;- isActive: Boolean&#xa;- category: String&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="184" as="geometry" />
+        </mxCell>
+        <mxCell id="t_color_prices" parent="1" value="color_prices" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="340" y="1240" width="280" height="178" as="geometry" />
+        </mxCell>
+        <mxCell id="f_color_prices" parent="t_color_prices" value="- id: Int&#xa;- thicknessMin: Int&#xa;- thicknessMax: Int&#xa;- pricePerSide: Float&#xa;- isActive: Boolean&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="152" as="geometry" />
+        </mxCell>
+        <mxCell id="t_cmyk_blok_prices" parent="1" value="cmyk_blok_prices" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="640" y="1240" width="280" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="f_cmyk_blok_prices" parent="t_cmyk_blok_prices" value="- id: Int&#xa;- thicknessMin: Int&#xa;- thicknessMax: Int&#xa;- cetakPrice: Float&#xa;- dragPrice: Float&#xa;- platPrice: Float&#xa;- isActive: Boolean&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="184" as="geometry" />
+        </mxCell>
+        <mxCell id="t_pricing_config" parent="1" value="pricing_config" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="940" y="1240" width="280" height="194" as="geometry" />
+        </mxCell>
+        <mxCell id="f_pricing_config" parent="t_pricing_config" value="- id: Int&#xa;- pondMultiplier: Float&#xa;- packingDivisor: Int&#xa;- packingMultiplier: Float&#xa;- laminasiMultiplier: Float&#xa;- pisauPrice: Float&#xa;- dragThreshold: Int&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="t_bank_accounts" parent="1" value="bank_accounts" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1">
+          <mxGeometry x="1240" y="1240" width="280" height="242" as="geometry" />
+        </mxCell>
+        <mxCell id="f_bank_accounts" parent="t_bank_accounts" value="- id: Int&#xa;- bankName: String&#xa;- accountNumber: String&#xa;- accountHolderName: String&#xa;- branch: String?&#xa;- imageUrl: String?&#xa;- publicId: String?&#xa;- isActive: Boolean&#xa;- displayOrder: Int&#xa;- createdAt: DateTime&#xa;- updatedAt: DateTime&#xa;___________________________&#xa;+ create()&#xa;+ update()&#xa;+ delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;fontColor=#000000;" vertex="1">
+          <mxGeometry y="26" width="280" height="216" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_users_orders" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;" source="t_users" target="t_orders" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_orders_payments" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;" source="t_orders" target="t_payments" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_users_payments" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;1;dashed=1" source="t_users" target="t_payments" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_users_order_history" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;1;dashed=1" source="t_users" target="t_order_history" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_orders_order_history" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;" source="t_orders" target="t_order_history" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_box_models_orders" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;1;dashed=1" source="t_box_models" target="t_orders" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_materials_orders" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;1;dashed=1" source="t_materials" target="t_orders" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_plano_types_orders" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;1;dashed=1" source="t_plano_types" target="t_orders" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_plano_types_material_prices" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;1;dashed=1" source="t_plano_types" target="t_material_prices" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_materials_material_prices" parent="1" value="1...*" style="endArrow=block;endFill=0;endSize=10;edgeStyle=orthogonalEdgeStyle;html=1;rounded=0;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;1;dashed=1" source="t_materials" target="t_material_prices" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
