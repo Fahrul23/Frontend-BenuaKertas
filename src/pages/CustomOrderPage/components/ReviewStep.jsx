@@ -20,7 +20,6 @@ const ReviewStep = ({
   selectedColor,
   laminationSide,
   laminationType,
-  selectedFinishing,
   uploadedFile,
   quantity,
   boxData,
@@ -61,10 +60,6 @@ const ReviewStep = ({
   let finishingLabel = laminationTypeName
     ? `${laminationTypeName} (${laminationSideName})`
     : laminationSideName;
-
-  if (selectedFinishing) {
-    finishingLabel += ` + ${selectedFinishing}`;
-  }
 
   const fileName = uploadedFile ? uploadedFile.name : '-';
   const qtyFormatted = quantity ? `${Number(quantity).toLocaleString('id-ID')} pcs` : '-';

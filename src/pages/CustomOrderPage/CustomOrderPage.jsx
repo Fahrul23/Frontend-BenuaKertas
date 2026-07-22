@@ -33,7 +33,6 @@ const CustomOrderPage = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [laminationSide, setLaminationSide] = useState(null);
   const [laminationType, setLaminationType] = useState('');
-  const [selectedFinishing, setSelectedFinishing] = useState('');
   const [quantity, setQuantity] = useState('');
   const [uploadedFile, setUploadedFile] = useState(null);
   const [note, setNote] = useState('');
@@ -41,6 +40,12 @@ const CustomOrderPage = () => {
   // Error Modal State
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Loading states per API fetch
+  const [isModelsLoading, setIsModelsLoading] = useState(true);
+  const [isMaterialsLoading, setIsMaterialsLoading] = useState(true);
+  const [isThicknessLoading, setIsThicknessLoading] = useState(false);
+  const [isFinishingLoading, setIsFinishingLoading] = useState(true);
 
   // ============ PRICING ENGINE STATE ============
   const [pricingData, setPricingData] = useState({
@@ -119,25 +124,24 @@ const CustomOrderPage = () => {
   // Fetch Box Models from API
   useEffect(() => {
     const fetchModels = async () => {
+      setIsModelsLoading(true);
       try {
         const res = await masterDataAPI.getBoxModels();
         if (res.success && res.data.length > 0) {
-          const apiModels = res.data.map(m => {
-            return {
-              id: m.code,
-              name: m.name,
-              image: m.imageUrl
-            };
-          });
+          const apiModels = res.data.map(m => ({
+            id: m.code,
+            name: m.name,
+            image: m.imageUrl
+          }));
           setBoxData(prev => ({ ...prev, models: apiModels }));
         } else {
-          // If API is empty, set models to empty array
           setBoxData(prev => ({ ...prev, models: [] }));
         }
       } catch (err) {
         console.error('Failed to fetch models from API', err);
-        // On error, set models to empty array
         setBoxData(prev => ({ ...prev, models: [] }));
+      } finally {
+        setIsModelsLoading(false);
       }
     };
     fetchModels();
@@ -146,6 +150,7 @@ const CustomOrderPage = () => {
   // Fetch Materials from API
   useEffect(() => {
     const fetchMaterials = async () => {
+      setIsMaterialsLoading(true);
       try {
         const res = await masterDataAPI.getMaterials();
         if (res.success && res.data.length > 0) {
@@ -158,6 +163,8 @@ const CustomOrderPage = () => {
         }
       } catch (err) {
         console.error('Failed to fetch materials from API', err);
+      } finally {
+        setIsMaterialsLoading(false);
       }
     };
     fetchMaterials();
@@ -166,6 +173,7 @@ const CustomOrderPage = () => {
   // Fetch Finishing Options from API
   useEffect(() => {
     const fetchFinishingOptions = async () => {
+      setIsFinishingLoading(true);
       try {
         const res = await masterDataAPI.getFinishingOptions();
         if (res.success && res.data.length > 0) {
@@ -175,12 +183,13 @@ const CustomOrderPage = () => {
           const typeOpts = res.data
             .filter(opt => opt.category === 'type')
             .map(opt => ({ id: opt.code, name: opt.name, image: opt.imageUrl }));
-          
           setLaminationSideOptions(sideOpts);
           setLaminationTypeOptions(typeOpts);
         }
       } catch (err) {
         console.error('Failed to fetch finishing options from API', err);
+      } finally {
+        setIsFinishingLoading(false);
       }
     };
     fetchFinishingOptions();
@@ -212,7 +221,6 @@ const CustomOrderPage = () => {
       if (selectedColor) requestData.colorOption = selectedColor;
       if (laminationSide) requestData.laminationSide = laminationSide;
       if (laminationType) requestData.laminationType = laminationType;
-      if (selectedFinishing) requestData.finishing = selectedFinishing;
       if (quantity) requestData.quantity = parseInt(quantity);
 
       const result = await calculatorAPI.calculatePrice(requestData);
@@ -228,7 +236,7 @@ const CustomOrderPage = () => {
     } catch (err) {
       setPricingError(err.message);
     }
-  }, [selectedModel, sizes, selectedMaterial, selectedThickness, selectedColor, laminationSide, laminationType, selectedFinishing, quantity]);
+  }, [selectedModel, sizes, selectedMaterial, selectedThickness, selectedColor, laminationSide, laminationType, quantity]);
 
   // Recalculate pricing when relevant data changes
   useEffect(() => {
@@ -244,8 +252,8 @@ const CustomOrderPage = () => {
   // Reset thickness when material changes (because GSM options differ)
   const handleMaterialSelect = async (materialId) => {
     setSelectedMaterial(materialId);
-    setSelectedThickness(null); // reset thickness
-    // Fetch thickness options for this material from API
+    setSelectedThickness(null);
+    setIsThicknessLoading(true);
     try {
       const res = await masterDataAPI.getThicknessByMaterialCode(materialId);
       if (res.success && res.data.length > 0) {
@@ -256,6 +264,8 @@ const CustomOrderPage = () => {
     } catch (err) {
       console.error('Failed to fetch thickness options', err);
       setThicknessOptions([]);
+    } finally {
+      setIsThicknessLoading(false);
     }
   };
 
@@ -275,7 +285,6 @@ const CustomOrderPage = () => {
           colorSides: selectedColor,
           laminationSide: laminationSide,
           laminationType: laminationType,
-          finishing: selectedFinishing,
           quantity: parseInt(quantity),
           designFile: uploadedFile,
           note: note
@@ -438,7 +447,6 @@ const CustomOrderPage = () => {
               selectedColor={selectedColor}
               laminationSide={laminationSide}
               laminationType={laminationType}
-              selectedFinishing={selectedFinishing}
               uploadedFile={uploadedFile}
               quantity={quantity}
               boxData={boxData}
@@ -489,6 +497,7 @@ const CustomOrderPage = () => {
                     models={boxData.models}
                     selectedModel={selectedModel}
                     onModelSelect={setSelectedModel}
+                    isLoading={isModelsLoading}
                   />
                 )}
 
@@ -512,6 +521,8 @@ const CustomOrderPage = () => {
                     thicknessOptions={thicknessOptions}
                     onMaterialSelect={handleMaterialSelect}
                     onThicknessSelect={setSelectedThickness}
+                    isLoading={isMaterialsLoading}
+                    isThicknessLoading={isThicknessLoading}
                   />
                 )}
 
@@ -532,8 +543,7 @@ const CustomOrderPage = () => {
                     typeOptions={laminationTypeOptions}
                     onSideSelect={setLaminationSide}
                     onTypeSelect={setLaminationType}
-                    selectedFinishing={selectedFinishing}
-                    onFinishingChange={setSelectedFinishing}
+                    isLoading={isFinishingLoading}
                   />
                 )}
 

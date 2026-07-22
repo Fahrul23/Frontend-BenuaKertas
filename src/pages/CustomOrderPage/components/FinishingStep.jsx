@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react';
 import { cn } from '@/utils';
+import SkeletonCard from './SkeletonCard';
 
 const OptionCard = ({ option, selected, onClick }) => (
   <div onClick={() => onClick(option.id)} className="relative cursor-pointer group">
@@ -47,9 +48,20 @@ const OptionCard = ({ option, selected, onClick }) => (
   </div>
 );
 
-const FinishingStep = ({ laminationSide, laminationType, sideOptions = [], typeOptions = [], onSideSelect, onTypeSelect, selectedFinishing, onFinishingChange }) => {
+const FinishingStep = ({
+  laminationSide,
+  laminationType,
+  sideOptions = [],
+  typeOptions = [],
+  onSideSelect,
+  onTypeSelect,
+  isLoading = false,
+}) => {
   // Tampilkan baris Tipe Laminasi hanya jika sisi sudah dipilih dan bukan tanpa-laminasi
-  const showLaminationType = laminationSide !== '' && laminationSide !== null && laminationSide !== 'tanpa-laminasi';
+  const showLaminationType =
+    laminationSide !== '' &&
+    laminationSide !== null &&
+    laminationSide !== 'tanpa-laminasi';
 
   const handleSideChange = (code) => {
     onSideSelect(code);
@@ -69,8 +81,14 @@ const FinishingStep = ({ laminationSide, laminationType, sideOptions = [], typeO
       {/* Baris 1: Sisi Laminasi — selalu tampil */}
       <section className="mb-8">
         <p className="text-color-secondary text-sm font-semibold mb-4">Sisi Laminasi</p>
-        {sideOptions.length === 0 ? (
-          <div className="text-sm text-gray-400">Memuat opsi sisi laminasi...</div>
+
+        {isLoading || sideOptions.length === 0 ? (
+          // Skeleton — 4 placeholder option cards
+          <div className="grid grid-cols-4 gap-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <SkeletonCard key={i} variant="option" />
+            ))}
+          </div>
         ) : (
           <div className="grid grid-cols-4 gap-6">
             {sideOptions.map((option) => (
@@ -89,8 +107,14 @@ const FinishingStep = ({ laminationSide, laminationType, sideOptions = [], typeO
       {showLaminationType && (
         <section className="transition-all duration-300 animate-in fade-in slide-in-from-bottom-2">
           <p className="text-color-secondary text-sm font-semibold mb-4">Tipe Laminasi</p>
-          {typeOptions.length === 0 ? (
-            <div className="text-sm text-gray-400">Memuat opsi tipe laminasi...</div>
+
+          {isLoading || typeOptions.length === 0 ? (
+            // Skeleton — 2 placeholder option cards
+            <div className="grid grid-cols-4 gap-6">
+              {Array.from({ length: 2 }).map((_, i) => (
+                <SkeletonCard key={i} variant="option" />
+              ))}
+            </div>
           ) : (
             <div className="grid grid-cols-4 gap-6">
               {typeOptions.map((option) => (
@@ -105,26 +129,8 @@ const FinishingStep = ({ laminationSide, laminationType, sideOptions = [], typeO
           )}
         </section>
       )}
-
-      {/* Baris 3: Finishing Tambahan */}
-      <section className="mt-8 transition-all duration-300 animate-in fade-in slide-in-from-bottom-2">
-        <p className="text-color-secondary text-sm font-semibold mb-4">Finishing Tambahan (Opsional)</p>
-        <div className="max-w-md">
-          <input
-            type="text"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-color-secondary focus:border-transparent transition-all"
-            placeholder="Contoh: Poly Emas, Emboss, Spot UV, dll."
-            value={selectedFinishing || ''}
-            onChange={(e) => onFinishingChange(e.target.value)}
-          />
-          <p className="text-xs text-gray-500 mt-2">
-            Biaya tambahan untuk finishing akan dihitung secara manual oleh admin setelah pesanan dibuat.
-          </p>
-        </div>
-      </section>
     </div>
   );
 };
 
 export default FinishingStep;
-
