@@ -78,12 +78,12 @@ const navItems = [
   //   to: '/admin/pricing-config',
   //   icon: Settings,
   // },
-  // [HIDDEN] Bank Accounts
-  // {
-  //   label: 'Bank Accounts',
-  //   to: '/admin/bank-accounts',
-  //   icon: CreditCard,
-  // },
+  { type: 'separator', label: 'Pembayaran' },
+  {
+    label: 'Bank Accounts',
+    to: '/admin/bank-accounts',
+    icon: CreditCard,
+  },
 ];
 
 // ── Sidebar Component ────────────────────────────────────────────────────────

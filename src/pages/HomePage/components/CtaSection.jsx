@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components';
-import sushieImg from '@/assets/sushie.svg';
+import sushieImg from '@/assets/Box_Sushi_Homepage_png.png';
 
 const CtaSection = () => {
     return (
